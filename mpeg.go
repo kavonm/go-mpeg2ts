@@ -188,7 +188,7 @@ func TransportStreamFile(r *os.File) {
 	counter := map[uint16]int{}
 	PAT := map[uint16]uint16{}
 	PID := map[uint16]map[uint8]int{}
-	temp := []byte{}
+	//temp := []byte{}
 	for {
 		buffer := make([]byte, 188)
 		err := binary.Read(r, binary.BigEndian, &buffer)
@@ -233,9 +233,12 @@ func TransportStreamFile(r *os.File) {
 }
 
 func main() {
-	f, err := os.Open("test.ts")
-	if err != nil {
-		fmt.Println(err)
-	}
-	TransportStreamFile(f)
+	server()
+	/*
+		f, err := os.Open("test.ts")
+		if err != nil {
+			fmt.Println(err)
+		}
+		TransportStreamFile(f)
+	*/
 }
