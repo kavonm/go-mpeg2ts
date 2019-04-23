@@ -3,6 +3,8 @@
 
 ### 使い方
 `mpeg.go`を参照
+
+`test.ts`ファイルからEIT取得
 ```
 func main() {
 	f, err := os.Open("test.ts")
