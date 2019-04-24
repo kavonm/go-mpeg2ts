@@ -2,13 +2,11 @@
 *開発中のためpackage mainで実装中
 
 MPEG2TSのParse
-
+```
 ARIB STD-B10
-
 ARIB STD-B24 (text関係)
-
 ISO/IEC 13818-1
-
+```
 
 ### 使い方
 `mpeg.go`を参照
