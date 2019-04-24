@@ -1,6 +1,11 @@
 # go-mpeg2ts
 *開発中のためpackage mainで実装中
 
+MPEG2TSのParse
+ARIB STD-B10
+ARIB STD-B24 (text関係)
+ISO/IEC 13818-1
+
 ### 使い方
 `mpeg.go`を参照
 
@@ -18,3 +23,8 @@ func main() {
     fmt.Println(data)
 }
 ```
+
+### 課題
+- 完全な番組表の取得(現在EITのShortEventDescriptorのみ)
+- ARIB STD-B24の文字コード関係の実装
+- ARIB STD-B25も実装したい(暗号化と復号化)
