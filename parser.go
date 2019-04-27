@@ -6,6 +6,19 @@ import (
 	"os"
 )
 
+type TS struct {
+	Section map[uint8]Section
+}
+
+type Section struct {
+	Event map[uint16]Event
+}
+
+type Event struct {
+	ShortEventDescriptor    ShortEventDescriptor
+	ExtendedEventDescriptor ExtendedEventDescriptor
+}
+
 func (p Packet) Parser() ([]byte, []byte) {
 	PID := p.PID()
 	switch PID {
@@ -27,8 +40,8 @@ func (p Packet) Parser() ([]byte, []byte) {
 	return nil, nil
 }
 
-func TSFile(f *os.File, ids []byte) map[uint8]map[uint16]map[uint8][]ShortEventDescriptor {
-	data := map[uint8]map[uint16]map[uint8][]ShortEventDescriptor{}
+func TSFile(f *os.File, ids []byte) TS {
+	ts := TS{map[uint8]Section{}}
 
 	pidBuf := map[uint16][]byte{}
 
@@ -53,14 +66,11 @@ func TSFile(f *os.File, ids []byte) map[uint8]map[uint16]map[uint8][]ShortEventD
 		}
 		if buf, ok := pidBuf[PID]; ok {
 			table := Table(buf)
-			temp := table.Parser(ids, data)
-			if temp != nil {
-				data = temp
-			}
+			table.Parser(ids, &ts)
 		}
 		if next != nil {
 			pidBuf[PID] = next
 		}
 	}
-	return data
+	return ts
 }
