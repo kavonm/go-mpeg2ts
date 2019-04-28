@@ -1,8 +1,13 @@
 package main
 
 import (
+	"bufio"
+	"bytes"
 	"fmt"
 	"os"
+
+	"golang.org/x/text/encoding/japanese"
+	"golang.org/x/text/transform"
 )
 
 func main() {
@@ -20,14 +25,24 @@ func main() {
 			fmt.Println("=========================")
 			fmt.Printf("%X", k)
 			fmt.Println("\n")
-			fmt.Printf("%X", e.ExtendedEventDescriptor.TextChar)
+			//fmt.Printf("%X", e.ExtendedEventDescriptor.TextChar)
+			scanner := bufio.NewScanner(transform.NewReader(bytes.NewBuffer(AribStr(e.ExtendedEventDescriptor.TextChar)), japanese.ISO2022JP.NewDecoder()))
+			for scanner.Scan() {
+				fmt.Println(scanner.Text())
+			}
 			fmt.Println("\n")
-			fmt.Printf("%X", e.ShortEventDescriptor.EventNameChar)
+			//fmt.Printf("%X", e.ShortEventDescriptor.EventNameChar)
+			scanner = bufio.NewScanner(transform.NewReader(bytes.NewBuffer(AribStr(e.ShortEventDescriptor.EventNameChar)), japanese.ISO2022JP.NewDecoder()))
+			for scanner.Scan() {
+				fmt.Println(scanner.Text())
+			}
 			fmt.Println("\n")
-			fmt.Printf("%X", e.ShortEventDescriptor.TextChar)
+			//fmt.Printf("%X", e.ShortEventDescriptor.TextChar)
+			scanner = bufio.NewScanner(transform.NewReader(bytes.NewBuffer(AribStr(e.ShortEventDescriptor.TextChar)), japanese.ISO2022JP.NewDecoder()))
+			for scanner.Scan() {
+				fmt.Println(scanner.Text())
+			}
 			fmt.Println("\n")
-			demo := AribStr(e.ShortEventDescriptor.EventNameChar)
-			fmt.Println(string(demo))
 		}
 	}
 }
