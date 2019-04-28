@@ -35,7 +35,11 @@ func main() {
 }
 ```
 
+### 現状
+- ARIBの文字コードの複合処理はほぼ実装できてる。(コードのリファクタリングが必要)
+- 特殊文字のMAPはまだ実装してない。
+- DescriptorはShortEventDescriptorとExtendedEventDescriptorだけ
+
 ### 課題
 - 完全な番組表の取得(現在EITのShortEventDescriptorのみ)
-- ARIB STD-B24の文字コード関係の実装
 - ARIB STD-B25も実装したい(暗号化と復号化)
