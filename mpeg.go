@@ -15,4 +15,19 @@ func main() {
 
 	data := TSFile(f, ids)
 	fmt.Println(data)
+	for _, s := range data.Section {
+		for k, e := range s.Event {
+			fmt.Println("=========================")
+			fmt.Printf("%X", k)
+			fmt.Println("\n")
+			fmt.Printf("%X", e.ExtendedEventDescriptor.TextChar)
+			fmt.Println("\n")
+			fmt.Printf("%X", e.ShortEventDescriptor.EventNameChar)
+			fmt.Println("\n")
+			fmt.Printf("%X", e.ShortEventDescriptor.TextChar)
+			fmt.Println("\n")
+			demo := AribStr(e.ShortEventDescriptor.EventNameChar)
+			fmt.Println(string(demo))
+		}
+	}
 }
